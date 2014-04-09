@@ -13,11 +13,12 @@
   color:#95af3c;
 }
 
-
-li a{
-  color:#95af3c;
+span.badge.pull-right{
+  background-color: white;
+  color: #95af3c;
+  text-align: center;
+  margin-left: 5px;
   font-family: 'Nunito', sans-serif;
-  font-size:20px;
 }
 
 
@@ -43,21 +44,39 @@ li a{
 
 #title {
   color:#95af3c;
+  margin: 0;
 }
 
 #hello {
    font-size:17px;
    font-family: 'Alegreya Sans', sans-serif;
-
 }
+
+.weeks{
+   text-align: center;
+}
+
+
+.weeks li a{
+   color: white;
+   width: 50%;
+}
+
 
 
 .paragraph {
   font-size:18px;
 }
 
-dt a {
-  color:#95af3c;
+
+li a {
+  background-color: #95af3c;
+  color: white;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-family: 'Alegreya Sans', sans-serif;
+  font-size:20px;
 
 }
 

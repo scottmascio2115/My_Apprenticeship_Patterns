@@ -22,19 +22,32 @@
       <h2 id='apprentice'>My Apprenticeship Patterns at Neo Columbus</h2>
        <hr/>
 
-        <div class="container-fluid">
-            <ul class="nav nav-pills">
-              <li><a href="#">Intro.</a></li>
-              <li><a href="#/week_one">Week One</a></li>
-              <li><a href="#/week_two">Week Two</a></li>
-              <li><a href="#/week_three">Week Three</a></li>
-              <li><a href="#/week_four">Week Four</a></li>
-              <li><a href="#/week_five">Week Five</a></li>
-            </ul>
-        </div>
       </div>
     </div>
+    <div class="row">
+         <div class="span4">
+           <ul class="nav nav-list">
+            <li><a href="#">Intro.</a></li>
+            <li><a href="#/growth_mindset">Growth Mindset<span class="badge pull-right">3</span></a></li>
+            <li><a href="#/emptying_the_cup">Emptying the Cup<span class="badge pull-right">1</span></a></li>
+            <li><a href="#/construct_your_own_curriculm">Construct Your Curriculum<span class="badge pull-right">3</span></a></li>
+            <li><a href="#/exposing_your_ignorance">Exposing Your Ignorance<span class="badge pull-right">1</span></a></li>
+            <li><a href="#/sweep_the_floor">Sweep the Floor<span class="badge pull-right">1</span></a></li>
+            <li><a href="#/walking_the_long_road">Walking the Long Road<span class="badge pull-right">2</span></a></li>
+            <li><a href="#/accurate_self_assessment">Accurate Self-Assessment<span class="badge pull-right">1</span></a></li>
+            <li><a href="#/perpetual_learning">Perpetual Learning<span class="badge pull-right">1</span></a></li>
+            <li><a href="#/a_different_road">A Different Road<span class="badge pull-right">1</span></a></li>
+            <li><a href="#/draw_your_own_map">Draw Your Own Map<span class="badge pull-right">1</span></a></li>
+            <li><a href="#/all_posts">All Posts<span class="badge pull-right">5</span></a></li>
+           </ul>
+         </div>
+         <div class="span8">
+          <div class='container'>
+            {{outlet}}
+          </div>
 
+         </div>
+     </div>
     <div class='container'>
       <div class='footer'>
         <div class="navbar navbar-default navbar-fixed-bottom">
@@ -49,43 +62,119 @@
     </div>
 
 
-    <div class='container'>
-      {{outlet}}
-    </div>
 
   </script>
 
   <script type="text/x-handlebars" data-template-name="index">
        <div class="container">
-         <div class="row">
-           <div class="span6">
             <h3  id='title'>Welcome!!<h3>
             <p id='hello'>
             My name is Scott Mascio and I am currently an apprentice at Neo Columbus. On this site you will find my blog posts describing my journey from trader on the Chicago Board of Trade to apprentice at Neo. More importantly I will share with you the lessons and experiences I have learned while being an apprentice at Neo.
             </p>
             <p id='hello'>
-            Prior to becoming an apprentice at Neo I attended Dev BootCamp. At Dev BootCamp I read the book Apprenticeship Patterns, written by Dev BootCamp Chicago founder Dave Hoover. I have used his book as a reference during my apprenticeship. Each week I have noted how my experience&#39;s have related to the principles in the book. I try to reference three principles a week, the outline of the principles mentioned is to the right.
+            Prior to becoming an apprentice at Neo I attended Dev BootCamp. At Dev BootCamp I read the book Apprenticeship Patterns, written by Dev BootCamp Chicago founder Dave Hoover. I have used his book as a reference during my apprenticeship. Each week I have noted how my experience&#39;s have related to the principles in the book. I try to reference three principles a week in each post. To the right is an outline of the principles mentioned, and how many posts they are referenced in.
             </p>
             <p id='hello'>
              Forgive me for any grammatical or spelling errors, I&#39;ll fix them if you send me a note or tweet me, thanks!
             </p>
-           </div>
-           <div class="span6">
-             <dl>
-              <dt id='title'><a href="#/week_one"> Week One </a></dt>
-              <dd><span class="label label-success"><a href="#/week_one">Growth Mindset</a></span> <span class="label label-success"><a href="#/week_one">Emptying the Cup</a></span> <span class="label label-success"><a href="#/week_one">Construct Your Curriculum</a></span></dd><br>
-              <dt id='title'><a href="#/week_two"> Week Two </a></dt>
-              <dd><span class="label label-success"><a href="#/week_two">Growth Mindset</a></span> <span class="label label-success"><a href="#/week_two">Exposing Your Ignorance</a></span> <span class="label label-success"><a href="#/week_two">Construct Your Curriculum</a></span></dd><br>
-              <dt id='title'><a href="#/week_three"> Week Three </a></dt>
-              <dd><span class="label label-success"><a href="#/week_three">Growth Mindset</a></span> <span class="label label-success"><a href="#/week_three">Sweep the Floor</a></span> <span class="label label-success"><a href="#/week_three">Construct Your Curriculum</a></span></dd><br>
-              <dt id='title'><a href="#/week_four"> Week Four </a></dt>
-              <dd><span class="label label-success"><a href="#/week_four">The Long Road</a></span> <span class="label label-success"><a href="#/week_four">Accurate Self-Assessment</a></span> <span class="label label-success"><a href="#/week_four">Perpetual Learning</a></span></dd><br>
-              <dt id='title'><a href="#/week_five"> Week Five </a></dt>
-              <dd><span class="label label-success"><a href="#/week_five">A Different Road</a></span> <span class="label label-success"><a href="#/week_five">Draw Your Own Map</a></span> <span class="label label-success"><a href="#/week_five">Walking the Long Road</a></span></dd>
-              </dl>
-           </div>
-         </div>
       </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="growth_mindset">
+    <div class='weeks'>
+     <ul class="nav nav-list">
+      <li><a href="#/week_one">Week One</a></li>
+      <li><a href="#/week_two">Week Two</a></li>
+      <li><a href="#/week_three">Week Three</a></li>
+     </ul>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="emptying_the_cup">
+    <div class='weeks'>
+     <ul class="nav nav-list">
+       <li><a href="#/week_one">Week One</a></li>
+     </ul>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="construct_your_own_curriculm">
+    <div class='weeks'>
+     <ul class="nav nav-list">
+      <li><a href="#/week_one">Week One</a></li>
+      <li><a href="#/week_two">Week Two</a></li>
+      <li><a href="#/week_three">Week Three</a></li>
+     </ul>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="exposing_your_ignorance">
+    <div class='weeks'>
+     <ul class="nav nav-list">
+      <li><a href="#/week_two">Week Two</a></li>
+     </ul>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="sweep_the_floor">
+    <div class='weeks'>
+     <ul class="nav nav-list">
+      <li><a href="#/week_three">Week Three</a></li>
+     </ul>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="walking_the_long_road">
+    <div class='weeks'>
+     <ul class="nav nav-list">
+      <li><a href="#/week_four">Week Four</a></li>
+      <li><a href="#/week_five">Week Five</a></li>
+     </ul>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="accurate_self_assessment">
+    <div class='weeks'>
+     <ul class="nav nav-list">
+      <li><a href="#/week_four">Week Four</a></li>
+     </ul>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="perpetual_learning">
+    <div class='weeks'>
+     <ul class="nav nav-list">
+      <li><a href="#/week_four">Week Four</a></li>
+     </ul>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="a_different_road">
+    <div class='weeks'>
+     <ul class="nav nav-list">
+       <li><a href="#/week_five">Week Five</a></li>
+     </ul>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="draw_your_own_map">
+    <div class='weeks'>
+     <ul class="nav nav-list">
+        <li><a href="#/week_five">Week Five</a></li>
+      </ul>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="all_posts">
+    <div class='weeks'>
+     <ul class="nav nav-list">
+      <li><a href="#/week_one">Week One</a></li>
+      <li><a href="#/week_two">Week Two</a></li>
+      <li><a href="#/week_three">Week Three</a></li>
+      <li><a href="#/week_four">Week Four</a></li>
+      <li><a href="#/week_five">Week Five</a></li>
+     </ul>
+    </div>
   </script>
 
   <script type="text/x-handlebars" data-template-name="week_one">
