@@ -21,6 +21,14 @@ span.badge.pull-right{
   font-family: 'Nunito', sans-serif;
 }
 
+span.badge.pull-left{
+  background-color: white;
+  color: #95af3c;
+  text-align: center;
+  margin-left: 5px;
+  font-family: 'Nunito', sans-serif;
+}
+
 
 .footer{
    color:#95af3c;
