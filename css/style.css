@@ -37,12 +37,12 @@ span.badge.pull-left{
 }
 
 .navbar.navbar-default.navbar-fixed-bottom{
-  background-color:#95af3c;
+  background-color:white;
   text-align: center;
 }
 
 .navbar.navbar-default.navbar-fixed-bottom a{
-  color: white;
+  color:#95af3c;
 }
 
 
