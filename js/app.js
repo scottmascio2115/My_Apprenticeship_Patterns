@@ -8,6 +8,7 @@ Patterns.Router.map(function() {
   this.resource('week_five');
   this.resource('week_one');
   this.resource('week_six');
+  this.resource('week_seven');
   this.resource('growth_mindset');
   this.resource('emptying_the_cup');
   this.resource('construct_your_own_curriculm');
@@ -20,6 +21,8 @@ Patterns.Router.map(function() {
   this.resource('draw_your_own_map');
   this.resource('confronting_your_ignorance');
   this.resource('all_posts');
+  this.resource('practice');
+  this.resource('concrete_tools');
 });
 
 
