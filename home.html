@@ -40,6 +40,7 @@
             <li><a href="#/a_different_road">A Different Road<span class="badge pull-right">1</span></a></li>
             <li><a href="#/draw_your_own_map">Draw Your Own Map<span class="badge pull-right">1</span></a></li>
             <li><a href="#/confronting_your_ignorance">Confronting Your Ignorance<span class="badge pull-right">1</span></a></li>
+            <li><a id='plugin' href="#/jquery_plugin">Tutorial: Make a jQuery Plugin</a></li>
             <li><a href="#/week_one"> Feb-24 : Feb-28 <span class="badge pull-right">Week 1</span></a></li>
             <li><a href="#/week_two">March-3 : March-7<span class="badge pull-right">Week 2</span></a></li>
             <li><a href="#/week_three">March-10 : March-14<span class="badge pull-right">Week 3</span></a></li>
@@ -47,6 +48,7 @@
             <li><a href="#/week_five">March-24 : March-28<span class="badge pull-right">Week 5</span></a></li>
             <li><a href="#/week_six">March-31 : April-4<span class="badge pull-right">Week 6</span></a></li>
             <li><a href="#/week_seven">April-7 : April-11<span class="badge pull-right">Week 7</span></a></li>
+            <li><a href="#/week_8_week_10">April-14 : May-9<span class="badge pull-right">Weeks 8 : 11 </span></a></li>
            </ul>
          </div>
          <div class="span8">
@@ -212,6 +214,14 @@
       <li><a href="#/week_five">Week Five</a></li>
       <li><a href="#/week_six">Week Six</a></li>
      </ul>
+    </div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="week_8_week_10">
+    <div class='weeks'>
+     <ul class="nav nav-list">
+        <li><a href="#/jquery_plugin">Tutorial: Create a jQuery Plugin</a></li>
+      </ul>
     </div>
 </script>
 
@@ -758,6 +768,793 @@ end<br><br>
         </p>
       </div>
   </div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="jquery_plugin">
+    <div class="container">
+      <h3 id='title'> Weeks 8 : 11 Creation of jQuery referenceSection(); plugin</h3>
+      <span class="label label-success"><a href='https://plugins.jquery.com/referencesection/'>referenceSection(); Plugin</a></span>
+      <span class="label label-success"><a href='http://referencesection.herokuapp.com/'>referenceSection(); Demo Site</a></span>
+      <span class="label label-success"><a href='https://github.com/scottmascio2115/referenceSection'>referenceSection(); on GitHub</a></span><br><br>
+      <div class='paragraph'>
+        <p>
+          This week I was tasked with the challenge of making a jQuery plugin. A jQuery plugin is a method that extends jQuery prototype object. When extended to the jQuery prototype, all jQuery objects will have access to this new method. Anytime a jQuery object is created that object has access to a set of methods that all jQuery objects share, these methods include .css();, .append();, .filter();, etc.. Additionally when an HTML element is selected using the $ function such as $(‘a’) a jQuery object is returned and has access to those same methods. The method that I will extend onto the jQuery prototype object is called .referenceSection();.
+        </p>
+        <p>
+          The .referenceSection(); plugin will scan a page and add reference’s to every element on the page that is part of the ‘.rs’ class. The plugin will make a reference section at the bottom of the page with all the elements in the ‘.rs’ class, listed with either their url or text along side a brief description.
+        </p>
+        <p>
+          Additionally the plugin will append a numbered superscript to the url. When a user hovers over the superscript it will reveal the description. When the superscript is clicked the user will go to the location of the description in the reference section.
+        </p>
+        <p>
+          Before we get started please <a class="label label-danger" href='http://referencesection.herokuapp.com/'>demo the referenceSection(); plugin.</a></span>
+        </p>
+        <p>
+          With this task I felt like I was thrown into the deep end. Prior to this task my experience with using jQuery plugins was limited and usually resulted in me failing when attempting to add them to my projects. Now I had to create a plugin.
+        </p>
+        <p>
+          This was the type of challenge that I love and requested from Felix. I learn the most and gain the most confidence when stretched beyond my comfort zone. Its a great feeling not knowing anything about a subject, diving head first into it, and coming out the other side with new found skills and confidence. It also helps that I have a great support system at Neo, when I am stuck I can just ask them and they are more then willing to share how they would solve to problem.
+        </p>
+        <p>
+          When faced with a daunting large task it is best to break the large task up into small incrementing tasks.
+        </p>
+        <p>
+          Feature list for referenceSection(); plugin:
+        </p>
+        <ol>
+          <li>Configure and seed. [ ]</li>
+          <li>Create reference section beneath the body. [ ]</li>
+          <li>In reference section list superscripts containing the index of each element in reference section. [ ]</li>
+          <li>In reference section next to the superscripted index list the raw url if element is a link, if not a link list the text encapsulated inside the element. [ ]</li>
+          <li>In reference section list the description for each element next to the raw url/text. [ ]</li>
+          <li>Each element in the body that is part of the reference section should have an appended superscripted index value. [ ]</li>
+          <li>In the body when the superscript is clicked the page should scroll to the correct corresponding description in reference section. [ ]</li>
+          <li>In the reference section when the superscript is clicked the page should scroll to the correct corresponding link in the body. [ ]</li>
+          <li>In the body when a user hovers over the superscript the description of the link should appear in a quote bubble. [ ]</li>
+          <li>Refactor. [ ]</li>
+          <li>Make demo site featuring plugin. [ ]</li>
+          <li>Make Public: Register with jQuery plugin registry. [ ]</li>
+          <li>Maintain and update versions. [ ]</li>
+        </ol>
+        <p>
+          The overall task was to create a plugin but the first step is to configure an index.html page, application.css file and application.js file.
+        </p>
+        <p>
+          The index.html file is seeded with lorem ipsum. Lorem ipsum is placeholder text used for demonstration purposes. For my purposes I needed 5 paragraphs with 6 links and a 'div' tag that encapsulates a set of text, such as &lt;div&gt; Ben Franklin &lt;/div&gt;. We will use these links and the 'div' tag to test our plugin.
+        </p>
+        <p>
+          The next step is to create and application.js file to hold all the javascript. Include that file in your the index.html file. A good way to know you have configured your project correctly is to include <i>console.log('I am ready');</i> in your application.js file. Refresh the index.html page and open the inspector you should see <i>I am ready</i>. In the Chrome browser to open the inspector hold command-option and hit j. Similarly a good way to know you have configured the CSS file correctly is to select the paragraphs, 'p' tags, and change the color to red, when refreshed the paragraphs should be red. Once the files are configured correctly, create a git repository and push the added files.
+        </p>
+        <p>
+          As I stated previously all jQuery objects share methods, the methods come from the $.fn object. The $.fn object contains all the methods and that is where we want to extend the .referenceSection(); method onto. We do this by attaching .referenceSection(); to $.fn.
+        </p>
+        <pre><code>
+          $.fn.referenceSection = function(){};
+        </pre></code>
+        <p>
+        The application.js file should read:
+        </p>
+        <pre><code>
+          $.fn.referenceSection = function () {};
+
+          $(document).ready(function () {
+              $("body").referenceSection();
+          });
+        </pre></code>
+        <p>
+          The .referenceSection(); function is created and then called on the HTML element body when the DOM is loaded.
+        </p>
+        <p>
+        To protect the use on the $ alias and to create additional scope we need to put the .referenceSection(); method inside an immediately-invoked function expression and pass the function jQuery, and name the parameter $. Wrapping the code inside an immediately-invoked function also provides scope and lets use set local variables if needed.
+        </p>
+        <p>
+        The application.js file should read:
+        </p>
+        <pre><code>
+          (function ($) {
+              $.fn.referenceSection = function () {
+
+                  return this;
+              };
+          }(jQuery));
+
+          $(document).ready(function () {
+              $("body").referenceSection();
+          });
+        </pre></code>
+        <p>
+          Users of the referenceSection(); plugin will be required to select each element they want to put in the reference section and label them with a class of '.rs'. A user will also be required to insert a data-info attribute within the tag. The data-info attribute will hold the description of the element being referenced in the reference section.
+        </p>
+        <p>
+          Examples of how the elements should look are as follows:
+        </p>
+        <pre><code>
+            &lt;a class='rs' href='http://www.neo.com/' data-info="Neo delivers exceptional software with robust engineering."&gt;Neo&lt;/a&gt;
+
+            or
+
+            &lt;span class='rs' data-info="Founding father of the US"&gt;Ben Franklin&lt;/span&gt;
+        </pre></code>
+        <p>
+          Our goal is to figure out how to isolate all of the elements in the body of the document that are part of the ‘.rs’ class. jQuery provides many methods for traversing and selecting elements in the DOM. The .find(); method will be used inside the .referenceSection(); method to select and iterate through each ‘.rs’ element. The code for finding and iterating through each ‘.rs’ element is as follows:
+        </p>
+        <pre><code>
+          this.find( ".rs" ).each(function() {});
+        </pre></code>
+        <p>
+        I like to use the jQuery .css(); method to test that I am selecting the correct elements. Place the following $('.rs').css('color', 'green'); inside the each loop. Placing this .css(); code inside the each loop should change all the '.rs' tags the color green. If it doesn’t you are missing a piece of code. Remove $('.rs').css('color', 'green'); from the each loop.
+        </p>
+        <p>
+        The application.js file should read:
+        </p>
+        <pre><code>
+          (function ($) {
+              $.fn.referenceSection = function () {
+
+                  this.find(".rs").each(function () {
+
+                  });
+
+                  return this;
+              };
+          }(jQuery));
+
+          $(document).ready(function () {
+              $("body").referenceSection();
+          });
+        </pre></code>
+        <p>
+        Inside the each loop is where we will eventually manipulate and append each element in the '.rs' class with a superscript. The superscript will be displayed as the numbered index of the element. The numbered superscript will also be a link that will point to the corresponding description of the element in the reference section. The reference section will be appended below the body. Each description in the reference section will be numbered and the url shown with a description.
+        </p>
+        <p>
+        Next step is to create the reference section.
+        </p>
+        <p>
+        Append to the 'body' the reference section that will hold the numbered url and description. This will be done using the .append(); jQuery method.
+        </p>
+        <pre><code>
+          $( "body" ).append("&lt;hr&gt;&lt;h3 id='reference'&gt;Reference Section&lt;/h3&gt;");
+        </pre></code>
+        <p>
+          The application.js file should read:
+        </p>
+        <pre><code>
+          (function ($) {
+
+              $.fn.referenceSection = function () {
+                  $( "body" ).append("&lt;hr&gt;&lt;h3 id='reference'&gt;Reference Section&lt;/h3&gt;");
+
+                  this.find(".rs").each(function () {
+
+                  });
+
+                  return this;
+              };
+          }(jQuery));
+
+          $(document).ready(function () {
+              $("body").referenceSection();
+          });
+        </pre></code>
+        <p>
+          Refresh your browser you should have a ‘Reference Section’.
+        </p>
+        <p>
+          Our next step is to iterate through each element that is part of the ‘.rs’ class. If the selected element in the ‘.rs’ class is a link we will use the raw url that is stored in the 'href' attribute as the label for the element in the reference section. If the element is not a link we will use the encapsulated text as the label for the element in the reference section.
+        </p>
+        <p>
+          Inside the each loop of the .reference(); method, console.log ‘this’. When you console.log(this); Each element that is part of the ‘.rs’ class should be shown in the console. You should see 6 'a' tags along with one 'div' tag.
+        </p>
+        <p>
+          ‘this’ is a very important concept of Javascript and there are many resources on the internet explaining the scope of ‘this’ and its importance, I would recommend reviewing them. I have developed the habit of using console.log to determine 'this' when I am in doubt of what ‘this’ is.
+        </p>
+        <p>
+          Set ‘this’ to a variable called 'element'.  The variable ‘element’ will now hold the element in the ‘.rs’ class that is being iterated over and all of its attributes.
+        </p>
+        <p>
+          The next step is to figure out a way to access the ‘href’ attribute if the varibale element is a link, the ‘href’ is an attribute inside of the 'a' tag that holds the raw url.
+        </p>
+        <p>
+          jQuery comes with the .attr(); method that gets or sets attributes of elements. We will use the .attr(); method to extract the ‘href’ from the element if it is a link. Set the extracted ‘href’ to a local variable named ‘href’.
+        </p>
+        <p>
+          jQuery come with another helpful method that we will use to get the encapsulated text from the element. We will use this text if the element is not a link. The jQuery method that we will use for this purpose is .text();. Set the extracted ‘text’ to a local variable named ‘text.’
+        </p>
+        <p>
+        The application.js file should read:
+        </p>
+        <pre><code>
+          (function ($) {
+
+                $.fn.referenceSection = function () {
+                    $( "body" ).append("&lt;hr&gt;&lt;h3 id='reference'&gt;Reference Section&lt;/h3&gt;");
+
+                    this.find(".rs").each(function () {
+                      var element = $( this );
+                      var href = element.attr("href");
+                      var text = element.text();
+
+                    });
+
+                    return this;
+                };
+            }(jQuery));
+
+            $(document).ready(function () {
+                $("body").referenceSection();
+            });
+        </pre></code>
+        <p>
+          Inside the each loop we now we have the local variable ‘href’ that contains the raw url, we can now construct a list of the raw urls from each ‘a’ tag and append them into the reference section. If the element is not a link we will use the text encapsulated in the element rather than the raw url, that text is stored in the local variable ‘text.’
+        </p>
+        <p>
+          Before we build out the reference section lets find the index value of each element is in the‘.rs’ class. 
+        </p>
+        <p>
+          Set variable 'i' outside of the each loop starting at 1, and after each loop increment the 'i' variable by one. The short hand to increment a variable by one is, ++i;.
+        </p>
+        <pre><code>
+          (function ($) {
+
+                $.fn.referenceSection = function () {
+                    $( "body" ).append("&lt;hr&gt;&lt;h3 id='reference'&gt;Reference Section&lt;/h3&gt;");
+                    var i = 1
+
+                    this.find(".rs").each(function () {
+                      var element = $( this );
+                      var href = element.attr("href");
+                      var text = element.text();
+
+                      ++i;
+                    });
+
+                    return this;
+                };
+            }(jQuery));
+
+            $(document).ready(function () {
+                $("body").referenceSection();
+            });
+        </pre></code>
+        <p>
+          We can see we now have created three important variables that we need for our plugin. The variable ‘href’ that holds the raw url, the variable ‘text’ that holds the encapsulated text and the variable ‘i’ that holds the index for each ‘.rs’ class element. With these three variables we can construct the list of references in the reference section.
+        </p>
+        <p>
+          Creat a variable ‘label’ that will be the the label of our element in the reference section. The conditional for the value of label reads; if ‘href’ is null or undefined set label to the variable 'text', if ‘href’ is not null or undefined and therefore the element is a link, the value of ‘label’ is ‘href.’
+        </p>
+        <pre><code>
+           var label = href === null || href === undefined ? text : href
+        </pre></code>
+        <p>
+          Each element in the reference section will be an &lt;li&gt; list element. We can hard code the creation of an HTML &lt;li&gt; element and place that inside of the each loop. Using the jQuery append(); method we can attach the &lt;li&gt; element  to the ‘body.’
+        </p>
+        <p>
+        The list item that is placed inside of the each loop looks like:
+        </p>
+        <pre><code>
+          $( "body" ).append("&lt;li id="+i+"&gt;"+"&lt;sup&gt;"+"[" + i + "]"+"&lt;/sup&gt;"+ " "+label+ ":" + "&lt;/li&gt;");
+        </pre></code>
+        <p>
+        The &lt;sup&gt; is the superscript tag. The variable ‘i’ is used twice once in the 'id' of the &lt;li&gt; tag and again inside of the &lt;sup&gt; tag surrounded by brackets.
+        </p>
+        <p>
+        The application.js file should read:
+        </p>
+        <pre><code>
+          (function ($) {
+
+                $.fn.referenceSection = function () {
+                    $( "body" ).append("&lt;hr&gt;&lt;h3 id='reference'&gt;Reference Section&lt;/h3&gt;");
+                    var i = 1
+
+                    this.find(".rs").each(function () {
+                      var element = $( this );
+                      var href = element.attr("href");
+                      var text = element.text();
+                      var label = href === null || href === undefined ? text : href
+
+                      $( "body" ).append("&lt;li id="+i+"&gt;"+"&lt;sup&gt;"+"[" + i + "]"+"&lt;/sup&gt;"+ " "+label+ ":" + "&lt;/li&gt;");
+
+                      ++i;
+                    });
+
+                    return this;
+                };
+            }(jQuery));
+
+            $(document).ready(function () {
+                $("body").referenceSection();
+            });
+        </pre></code>
+        <p>
+        Refresh the page, you should have a reference section with a numbered list of each element in the '.rs' class along with their url or text.
+        </p>
+        <p>
+          Lets look at the list of features for this plugin and determine what we have done and what we need to do:
+        </p>
+        <ol>
+          <li>Configure and seed. [X]</li>
+          <li>Create reference section beneath the body. [X]</li>
+          <li>In reference section list superscripts containing the index of each element in reference section. [X]</li>
+          <li>In reference section next to the superscripted index list the raw url if element is a link, if not a link list the text encapsulated inside the element. [X]</li>
+          <li>In reference section list the description for each element next to the raw url/text. [ ]</li>
+          <li>Each element in the body that is part of the reference section should have an appended superscripted index value. [ ]</li>
+          <li>In the body when the superscript is clicked the page should scroll to the correct corresponding description in reference section. [ ]</li>
+          <li>In the reference section when the superscript is clicked the page should scroll to the correct corresponding link in the body. [ ]</li>
+          <li>In the body when a user hovers over the superscript the description of the link should appear in a quote bubble. [ ]</li>
+          <li>Refactor. [ ]</li>
+          <li>Make demo site featuring plugin. [ ]</li>
+          <li>Make Public: Register with jQuery plugin registry. [ ]</li>
+          <li>Maintain and update versions. [ ]</li>
+        </ol>
+        <p>
+          Next lets attach each ‘.rs’ class element in the ‘body’ with a superscript of the index value. We will accomplish this similarly to how we attached the superscript inside of the reference section. We can reuse the variable ‘i’, we will also be using the variable ‘element’ which is set to ‘this’.
+        </p>
+        <pre><code>
+          element.after(" "+ "&lt;a href="+"#"+i+"&gt;" + "&lt;sup&gt;" + "[" + i + "]"+ "&lt;/sup&gt;" + "&lt;/a&gt;");
+        </pre></code>
+        <p>
+          We use the jQuery method .after(); to attach an ‘a’ tag which contains ‘i’ enclosed inside of a superscript tag. The ‘href’ inside the newly created ‘a’ tag is set to ‘#i’ this will provide the functionality when clicked to scroll to the correct corresponding description in the reference section with the id of ‘i.’ If you remember inside of the reference section we set each list item, &lt;li&gt; to have the id of ‘i’.
+        </p>
+        <p>
+          Feature complete, we now have attached each link in the body with a superscript and when that superscript is clicked the page scrolls to the proper element in the reference section.
+        </p>
+        <p>
+          The application.js file should read:
+        </p>
+        <pre><code>
+          (function ($) {
+
+                $.fn.referenceSection = function () {
+                    $( "body" ).append("&lt;hr&gt;&lt;h3 id='reference'&gt;Reference Section&lt;/h3&gt;");
+                    var i = 1
+
+                    this.find(".rs").each(function () {
+                      var element = $( this );
+                      var href = element.attr("href");
+                      var text = element.text();
+                      var label = href === null || href === undefined ? text : href
+
+                      element.after(" "+ "&lt;a href="+"#"+i+"&gt;" + "&lt;sup&gt;" + "[" + i + "]"+ "&lt;/sup&gt;" + "&lt;/a&gt;");
+
+                      $( "body" ).append("&lt;li id="+i+"&gt;"+"&lt;sup&gt;"+"[" + i + "]"+"&lt;/sup&gt;"+ " "+label+ ":" + "&lt;/li&gt;");
+
+                      ++i;
+                    });
+
+                    return this;
+                };
+            }(jQuery));
+
+            $(document).ready(function () {
+                $("body").referenceSection();
+            });
+          </pre></code>
+          <p>
+            We have provided the functionality to allow when a superscript in the 'body' is clicked the page scrolls to the proper 'id' in the reference section. We can reuse that functionality for when we implement the feature for when a superscript is clicked in the reference section.
+          </p>
+          <p>
+            That feature states that the page should scroll up to the correct corresponding element in the body when the superscript is click in the reference section.
+          </p>
+          <p>
+            First add an ‘id’ to the superscript of the elements in the body. Since we have already have HTML elements with the ‘id’ of ‘i’ we need to use something else. Lets set the ‘id’ of each superscript in the ‘body’ with the ‘id’ of ‘i b’. The code for this change is as follows:
+          </p>
+          <pre><code>
+            element.after(" "+ "&lt;a href="+"#"+i+"&gt;" + "&lt;sup id="+i+"b"+"&gt;" + "[" + i + "]"+ "&lt;/sup&gt;" + "&lt;/a&gt;");
+          </pre></code>
+          <p>
+            In the reference section we need change the superscripted index into a link with an ‘href’ pointing to the correct corresponding element in the body. Lets wrap the existing superscript inside of an ‘a’ tag with an ‘href’ pointing to ‘# i b’. The ‘href’ points to the element in the body with the id of  ‘i b.’
+          </p>
+          <p>
+          The code for this change is as follows:
+          </p>
+          <pre><code>
+ $( "body" ).append("&lt;li id="+i+"&gt;"+ "&lt;a href="+"#"+i+"b"+"&gt;" + "&lt;sup&gt;"+"[" + i + "]"+"&lt;/sup&gt;"+ "&lt;/a&gt;" + " "+label+ ":" + "&lt;/li&gt;");
+          </pre></code>
+          <p>
+            The superscript is now a link that points to the HTML element with the ‘id’ of ‘i b’. We can now scroll to and from the link in the body to its description in the reference section.
+          </p>
+          <p>
+          The application.js file should read:
+          </p>
+          <pre><code>
+          (function ($) {
+
+                $.fn.referenceSection = function () {
+                    $( "body" ).append("&lt;hr&gt;&lt;h3 id='reference'&gt;Reference Section&lt;/h3&gt;");
+                    var i = 1
+
+                    this.find(".rs").each(function () {
+                      var element = $( this );
+                      var href = element.attr("href");
+                      var text = element.text();
+                      var label = href === null || href === undefined ? text : href
+
+                      element.after(" "+ "&lt;a href="+"#"+i+"&gt;" + "&lt;sup id="+i+"b"+"&gt;" + "[" + i + "]"+ "&lt;/sup&gt;" + "&lt;/a&gt;");
+
+                      $( "body" ).append("&lt;li id="+i+"&gt;"+ "&lt;a href="+"#"+i+"b"+"&gt;" + "&lt;sup&gt;"+"[" + i + "]"+"&lt;/sup&gt;"+ "&lt;/a&gt;" + " "+label+ ":" + "&lt;/li&gt;");
+
+                      ++i;
+                    });
+
+                    return this;
+                };
+            }(jQuery));
+
+            $(document).ready(function () {
+                $("body").referenceSection();
+            });
+          </pre></code>
+          <p>
+          Lets look at the feature list to see what we still need to accomplish:
+          </p>
+          <ol>
+          <li>Configure and seed. [X]</li>
+          <li>Create reference section beneath the body. [X]</li>
+          <li>In reference section list superscripts containing the index of each element in reference section. [X]</li>
+          <li>In reference section next to the superscripted index list the raw url if element is a link, if not a link list the text encapsulated inside the element. [X]</li>
+          <li>In reference section list the description for each element next to the raw url/text. [ ]</li>
+          <li>Each element in the body that is part of the reference section should have an appended superscripted index value. [X]</li>
+          <li>In the body when the superscript is clicked the page should scroll to the correct corresponding description in reference section. [X]</li>
+          <li>In the reference section when the superscript is clicked the page should scroll to the correct corresponding link in the body. [X]</li>
+          <li>In the body when a user hovers over the superscript the description of the link should appear in a quote bubble. [ ]</li>
+          <li>Refactor. [ ]</li>
+          <li>Make demo site featuring plugin. [ ]</li>
+          <li>Make Public: Register with jQuery plugin registry. [ ]</li>
+          <li>Maintain and update versions. [ ]</li>
+        </ol>
+        <p>
+          We have 2 features to add to the reference plugin and then we need to refactor our work and register the plugin. The features we need to add both involve dealing with the description for each link.
+        </p>
+        <p>
+          The reference plugin will require that the user of the plugin include a data attribute inside the element they want to reference. The data attribute is essentially an attribute that is used as storage of private data.  The 'data-info' attribute will be set inside the element that we want to provide a description of. In the index.html. The following illustrates how to do this:
+        </p>
+        <pre><code>
+          &lt;a class='rs' href='http://www.neo.com/' data-info="Neo delivers exceptional software with robust engineering."&gt;Neo&lt;/a&gt;
+
+          or
+
+          &lt;span class='rs' data-info="Founding father of the US"&gt;Ben Franklin&lt;/span&gt;
+        </pre></code>
+        <p>
+        Go through your index.html and add the 'data-info' attribute to the elements in your body that are part of the '.rs' class. Leave 1 element without the 'data-info' attribute. We need to account for the situation when a user of the plugin chooses not to add a description to one of their links.
+        </p>
+        <p>
+          We need to extract the description housed inside the ‘data-info’ attribute and attach it to the correct corresponding list item in the reference section.
+        </p>
+        <p>
+          To extract the description from the ‘data-info’ attribute we will use the .data(); method provided by jQuery. The .data(); method will let us get or set the data attribute of HTML elements in the DOM. For our purposes we will use the method to get or extract the description stored in the data attribute of each element and set it to the local variable ‘info.’
+        </p>
+        <p>
+          Inside the each loop console.log(this);. In the inspector you should see each element in the ‘.rs’ class and all their attributes, including the newly created ‘data-info’ attribute. Create a variable ‘info’ and set it to $( this).data('info'); We can now include the variable ‘info’ after our ‘href’ variable in our reference section, the code is as follows:
+        </p>
+        <pre><code>
+          var info = $( this).data('info');
+        </pre></code>
+        <pre><code>
+$( "body" ).append("&lt;li id="+i+"&gt;"+ "&lt;a href="+"#"+i+"b"+"&gt;" + "&lt;sup&gt;"+"[" + i + "]"+"&lt;/sup&gt;"+ "&lt;/a&gt;" + " "+label+ ":" + " " +info+ "&lt;/li&gt;");
+        </pre></code>
+        <p>
+        We now have a reference section containing a list. Each list item contains a superscripted index linking to the correct corresponding link in the body, the raw url or text and a description. We have not yet accounted for the situation if the user of the plugin does not provide a description of for a link in the body. Now if the ‘data-info’ is not defined the description is set as ‘undefined.’ We need to put in a guard so if the description is not found it should be set as ‘Description Not Found.’
+        </p>
+        <p>
+        Inside of the each loop we need to create a conditional ‘if’ statement dependent on the variable ‘info.’ If variable ‘info’ is undefined use ‘Description Not Found’ in place of 'info', and if the variable ‘info’ is defined use ‘info’ as the description. The ‘if’ statement should looks like this:
+        </p>
+        <pre><code>
+          if (info !== undefined) {
+            $("body").append("&lt;li id=" + i + "&gt;" + "&lt;a href=" + "#" + i + "b" + "&gt;" + "&lt;sup&gt;" + "[" + i + "]" + "&lt;/sup&gt;" + "&lt;/a&gt;"
+            + " " + label + ":" + " " + info + "&lt;/li&gt;");
+          } else {
+            $("body").append("&lt;li id=" + i + "&gt;" + "&lt;sup&gt;" + "[" + i + "]" + "&lt;/sup&gt;" + " " + label + ":" + " " + "Description Not
+            Found" + "&lt;/li&gt;");
+          }
+      </pre></code>
+      <p>
+       The application.js file should read:
+      </p>
+      <pre><code>
+          (function ($) {
+
+                $.fn.referenceSection = function () {
+                    $( "body" ).append("&lt;hr&gt;&lt;h3 id='reference'&gt;Reference Section&lt;/h3&gt;");
+                    var i = 1
+
+                    this.find(".rs").each(function () {
+                      var element = $( this );
+                      var href = element.attr("href");
+                      var text = element.text();
+                      var info = $( this).data('info');
+                      var label = href === null || href === undefined ? text : href
+
+
+                      element.after(" "+ "&lt;a href="+"#"+i+"&gt;" + "&lt;sup id="+i+"b"+"&gt;" + "[" + i + "]"+ "&lt;/sup&gt;" + "&lt;/a&gt;");
+
+                      if (info !== undefined) {
+                        $("body").append("&lt;li id=" + i + "&gt;" + "&lt;a href=" + "#" + i + "b" + "&gt;" + "&lt;sup&gt;" + "[" + i + "]"
+                        + "&lt;/sup&gt;" + "&lt;/a&gt;" + " " + label + ":" + " " + info + "&lt;/li&gt;");
+                      } else {
+                        $("body").append("&lt;li id=" + i + "&gt;" + "&lt;sup&gt;" + "[" + i + "]" + "&lt;/sup&gt;" + " " + label + ":" +
+                        " " + "Description Not Found" + "&lt;/li&gt;");
+                      }
+
+                      ++i;
+                    });
+
+                    return this;
+                };
+            }(jQuery));
+
+            $(document).ready(function () {
+                $("body").referenceSection();
+            });
+          </pre></code>
+          <p>
+          Having accounted for a link with no ‘data-info’ attribute we can move onto the next item in out features check list.
+          </p>
+          <p>
+          The last feature that we need to include in our reference plugin is in the ‘body’ when a user hovers over the superscript, the description of the element should appear in a quote bubble.
+          </p>
+          <p>
+          For this feature we will use the jQuery .hover(); method on the ’sup’ HTML tag. This hover functionality is put outside the each loop. Inside of the .hover(); function the scope of 'this' is the 'sup' tag that is being hovered over.
+          </p>
+          <p>
+          On the hover over 'this', append a ‘h5’ HTML element to the 'sup' tag with the description of the element being hovered over. To access the ‘data-info’ attribute of the correct element we need to traverse the DOM from the ’sup’ element into the associated element and extract the ‘data-info’ attribute. To do this traversing we use the jQuery traversal method, .parent();. When applied onto 'this' the .parent(); method with give us the parent element of 'this' which is the ‘a’ that encapsulates the 'sup' tag. We have gone one level up the DOM. Our next traversal will be into the immediately preceding sibling element, this element is the element and holds the 'data-info' element. The below variable is the element that holds the description we need to extract.
+          </p>
+          <pre><code>
+            var parents_sibling = $( this).parent().prev();
+          </pre></code>
+          <p>
+            Now that we have traversed the DOM and have captured the correct link we can extract the data out of that element the same way we have done previously, using the .data(); method. 
+          </p>
+          <pre><code>
+            var data = parents_sibling.data('info');
+          </pre></code>
+          <p>
+          Append a ‘h5’ onto ‘this’, the ‘sup’ tag.
+          </p>
+          <p>
+          The ‘h5’ should include the 'data' variable. The code is as follows:
+          </p>
+          <pre><code>
+            $( this ).append( $( "&lt;h5&gt;" +data+ "&lt;/h5&gt;" ) );
+          </pre></code>
+          <p>
+          The next part of the hover function is to remove the ‘h5’ when the mouse leaves the superscript, to do this we :
+          </p>
+          <pre><code>
+            $( this ).find( "h5:last" ).remove();
+          </pre></code>
+          <p>
+          The hover functionality seems to be working but we have applied the functionality to all the superscript tags not just the ones in the ‘body.’ We need a guard to make sure the hover functionality is only applied to superscripts in the ‘body’. A unique feature that our superscripts have in the ‘body’ is that they have a parent and that parent has a sibling with a ‘data attribute’. If we apply the following guard we will only select the superscripts that have an element with a description.
+          </p>
+          <pre><code>
+            if ( data !== undefined)
+            {
+              $( this ).append( $( "&lt;h5&gt;" +data+ "&lt;/h5&gt;" ) );
+            }
+          </pre></code>
+          <p>
+          The whole hover function looks like this and should be placed beneath the each loop.
+          </p>
+          <pre><code>
+            $("sup").hover(
+              function() {
+              var parents_sibling = $( this).parent().prev();
+              var data = parents_sibling.data('info');
+              if ( data !== undefined)
+                {
+                  $( this ).append( $( "&lt;h5&gt;" +data+ "&lt;/h5&gt;" ) );
+                }
+            },function() {
+              $( this ).find( "h5:last" ).remove();
+            });
+          </pre></code>
+          <p>
+            We still need to add the CSS on the span to make it look like a quote bubble:
+          </p>
+          <p>
+          Add this to your CSS file:
+          </p>
+          <pre><code>
+            li {
+              list-style-type: none;
+            }
+
+            h5 {
+              border: 1px solid white;
+              background-color: lightgrey;
+              color: black;
+              border-radius: 25px;
+              padding: 5px;
+              position: absolute;
+              clear: both;
+              display: inline-block;
+              overflow: hidden;
+              white-space: nowrap;
+            }
+          </pre></code>
+          <p>
+            Lets check the features checklist for the next feature to implement:
+          </p>
+          <ol>
+          <li>Configure and seed. [X]</li>
+          <li>Create reference section beneath the body. [X]</li>
+          <li>In reference section list superscripts containing the index of each element in reference section. [X]</li>
+          <li>In reference section next to the superscripted index list the raw url if element is a link, if not a link list the text encapsulated inside the element. [X]</li>
+          <li>In reference section list the description for each element next to the raw url/text. [X]</li>
+          <li>Each element in the body that is part of the reference section should have an appended superscripted index value. [X]</li>
+          <li>In the body when the superscript is clicked the page should scroll to the correct corresponding description in reference section. [X]</li>
+          <li>In the reference section when the superscript is clicked the page should scroll to the correct corresponding link in the body. [X]</li>
+          <li>In the body when a user hovers over the superscript the description of the link should appear in a quote bubble. [X]</li>
+          <li>Refactor. [ ]</li>
+          <li>Make demo site featuring plugin. [ ]</li>
+          <li>Make Public: Register with jQuery plugin registry. [ ]</li>
+          <li>Maintain and update versions. [ ]</li>
+        </ol>
+        <p>
+        Before the refactor this is what your application.js file should look like:
+        </p>
+      <pre><code>
+          (function ($) {
+
+                $.fn.referenceSection = function () {
+                    $( "body" ).append("&lt;hr&gt;&lt;h3 id='reference'&gt;Reference Section&lt;/h3&gt;");
+                    var i = 1
+
+                    this.find(".rs").each(function () {
+                      var element = $( this );
+                      var href = element.attr("href");
+                      var text = element.text();
+                      var info = $( this).data('info');
+                      var label = href === null || href === undefined ? text : href
+
+
+                      element.after(" "+ "&lt;a href="+"#"+i+"&gt;" + "&lt;sup id="+i+"b"+"&gt;" + "[" + i + "]"+ "&lt;/sup&gt;" + "&lt;/a&gt;");
+
+                      if (info !== undefined) {
+                        $("body").append("&lt;li id=" + i + "&gt;" + "&lt;a href=" + "#" + i + "b" + "&gt;" + "&lt;sup&gt;" + "[" + i + "]"
+                        + "&lt;/sup&gt;" + "&lt;/a&gt;" + " " + label + ":" + " " + info + "&lt;/li&gt;");
+                      } else {
+                        $("body").append("&lt;li id=" + i + "&gt;" + "&lt;sup&gt;" + "[" + i + "]" + "&lt;/sup&gt;" + " " + label + ":" +
+                        " " + "Description Not Found" + "&lt;/li&gt;");
+                      }
+
+                      ++i;
+                    });
+
+
+                    $("sup").hover(
+                      function() {
+                      var parents_sibling = $( this).parent().prev();
+                      var data = parents_sibling.data('info');
+                      if ( data !== undefined)
+                        {
+                          $( this ).append( $( "&lt;h5&gt;" +data+ "&lt;/h5&gt;" ) );
+                        }
+                    },function() {
+                      $( this ).find( "h5:last" ).remove();
+                    });
+
+
+                    return this;
+                };
+            }(jQuery));
+
+            $(document).ready(function () {
+                $("body").referenceSection();
+            });
+      </pre></code>
+      <p>
+      The CSS file should read:
+      </p>
+      <pre><code>
+        li {
+          list-style-type: none;
+        }
+
+        h5 {
+          border: 1px solid white;
+          background-color: lightgrey;
+          color: black;
+          border-radius: 25px;
+          padding: 5px;
+          position: absolute;
+          clear: both;
+          display: inline-block;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+      </pre></code>
+      <p>
+      Time to refactor.
+      </p>
+      <p>
+      Each one of the ‘if’ statements can be broken out and made into their own functions. All repetitive code needs to be broken out into reusable functions. We need to construct a present(); function to make sure a variable is neither ‘undefined’ nor ‘null.’ jQuery also provides a way to construct HTML elements. Once those refactors are done the refactored code should read as follows:
+      </p>
+        <pre><code>
+            (function($){
+              $.fn.referenceSection = function() {
+
+                function info_dom(info, index) {
+                  var description = present(info.description) ? 'Description Not Found': info.description;
+                  var label = present(info.href) ? info.text: info.href;
+
+                  var li = $('&lt;li&gt;', { id:index, text: " " + label +': '});
+                  var dom = li.append(description);
+                  var a = $('&lt;a&gt;', { href: '#' +index+ 'b'});
+                  var super_script = $('&lt;sup&gt;', { text: '[' +index+ ']'});
+
+                  a.append(super_script);
+                  dom.prepend(a);
+
+                  return dom;
+                };
+
+                function info_attachment(info){
+                  var attachment;
+
+                  if ( !present(info)) {
+                    attachment = $('&lt;h5&gt;', { text: info });
+                  }
+                  return attachment;
+                };
+
+                function present(val){
+                  return val === undefined || val === null
+                };
+
+                var i = 1
+
+                this.find( ".rs" ).each(function() {
+                  var aTag = $('&lt;a&gt;', { href: "#"+i });
+                  var supTag = $('&lt;sup&gt;', { id: i+ "b", text: "[" +i+ "]"});
+                  aTag.append(supTag);
+                  $(this).after(aTag);
+
+                  info = { href: $(this).attr('href'), description: $( this).data('info'), text: $(this).text()}
+                  var dom = info_dom(info, i);
+                  $( "body").append(dom);
+
+                  ++i;
+                });
+
+                $("sup").hover(
+                  function() {
+                  var parents_sibling = $( this).parent().prev();
+                  var data = parents_sibling.data('info');
+                  var attachment = info_attachment(data);
+                  $(this).append(attachment);
+
+                },function() {
+                  $( this ).find( "h5:last" ).remove();
+                });
+                return this;
+              };}(jQuery));
+
+              $( document ).ready(function() {
+                $("body").referenceSection();
+              });
+
+        </code></pre>
+        <p>
+        In this final refactor the 'Reference Section' header is removed in place the list of descriptions is appended to the ‘body’ without a header. The two ‘if’ statements were also broken up into two functions, 'info_dom' and 'info_attachment.' Inside these functions we create the HTML elements.  These functions are then invoked inside of the hover functionality and the each loop. A present(); function is also made to detect both ‘undefined’ and ‘null’ elements.
+        </p>
+        <p>
+        Now we are done lets register this plugin with jQuery so other people can use it. Registering a plugin is surprisingly simple. jQuery provides excelent documentation found here <a href="http://plugins.jquery.com/docs/publish/"> : Publishing Your Plugin </a>
+        </p>
+        <p>
+        The only problem that I found was version control. You cannot add to or change a version once it is published. Once you publish a version it is up and any changes need to come in the form of a new version. I changed my code three times and had to make three versions <a href='https://plugins.jquery.com/referencesection/'> in one day.</a> Once I published the first version I changed something minor and had to deploy a whole new version. Be mindful of this so you don’t make the same problem and have multiple versions deployed on the same day.
+        </p>
+        <p>
+        I found registering and creating a demo site very easy and if you run into problems feel free to email me or tweet me and we can figure it out!
+        </p>
+        <p>
+        Thanks for following along!
+        </p>
+        <span class="label label-success"><a href='https://plugins.jquery.com/referencesection/'>referenceSection(); Plugin</a></span>
+        <span class="label label-success"><a href='http://referencesection.herokuapp.com/'>referenceSection(); Demo Site</a></span>
+        <span class="label label-success"><a href='https://github.com/scottmascio2115/referenceSection'>referenceSection(); on GitHub</a></span><br><br>
+
 </script>
 
 
